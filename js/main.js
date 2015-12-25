@@ -1,20 +1,20 @@
+// Jordan Hand
+// 
+
 $(document).ready(function() {
 	getData();
 });
 
 function getData() {
 	var carDataUrl = 'https://data.seattle.gov/resource/gh64-vd9r.json';
-	var budgetData = 'https://data.seattle.gov/resource/g3q3-xtdq.json';
 
+	// Makes HTTP get request to get JSON data
 	$.get(carDataUrl, function(data) {
-		drawChart(data);
+		buildSankey(data);
 	});
 }
 
-function drawChart(data) {
-	buildSankey(data);
-}
-
+// Builds the sankey chart
 function buildSankey(data) {
 	var margin = {top: 10, right: 10, bottom: 10, left: 10};
     var width = $('#vis').width() - margin.left - margin.right;
@@ -42,6 +42,7 @@ function buildSankey(data) {
 	drawLinks(svg, graph, path);
 }
 
+// Draws the edges of the graph onto the sankey chart
 function drawLinks(svg, graph, path) {
 	var link = svg.append('g')
 		.selectAll('.link')
@@ -64,6 +65,7 @@ function drawLinks(svg, graph, path) {
 		});
 }
 
+// Draws vertecies of the graph onto the sankey chart
 function drawNodes(svg, sankey, graph) {
 	var node = svg.append('g')
 		.selectAll('.node')
