@@ -21,7 +21,7 @@ function buildSankey(data) {
     var width = $('#vis').width();
 
     $('#vis').height($(window).height() - $('#header').height() - margin.top * 5);
-    var height = $('#vis').height() - $('#header').height() - margin.top - margin.bottom;
+    var height = $('#vis').height() - $('#header').height();
 
     $('#vis svg').remove();
     var svg = d3.select('#vis')
@@ -119,6 +119,9 @@ function createGraph(data) {
 
     var count = 0;
     data.forEach(function (item) {
+        if (item.sold_by.toLowerCase().indexOf("other") > -1) {
+            item.sold_by = "OTHER";
+        }
         addNode(graph, seenNodes, item.dept);
         addNode(graph, seenNodes, item.sold_by);
 
